@@ -11,6 +11,9 @@ import paho.mqtt.client as mqtt
 import psutil
 import json
 
+
+
+
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
@@ -111,6 +114,8 @@ while True:
 			logger.info("System is rebooting..")
 			time.sleep(2)
 			os.system("reboot")
+
+		#elif(reboot.on_message()):
 
 		elif(topic == "workstation/{}/r/report".format(ip)):
 			client.publish("workstation/{}/n/report".format(ip), str(system) , 2, False)
