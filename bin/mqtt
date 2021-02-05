@@ -38,14 +38,12 @@ ram_usage = str(psutil.virtual_memory().percent) + " %"
 hdd = psutil.disk_usage('/')
 total = (hdd.total / (2**30))
 used = (hdd.used / (2**30))
-free = (hdd.free / (2**30))
 
 format_total = '{0:.3g}'.format(total)
 format_used = '{0:.3g}'.format(used)
-format_free = '{0:.3g}'.format(free)
+
 #used/total
 storage_used_total = str(format_used) + " GB" + " / " + str(format_total) + " GB"
-#storage_free = str(format_free) + " GB" 
 
 #used percentage
 used_percentage = float(format_used) / float(format_total) * 100
@@ -73,9 +71,9 @@ somejson = '{"Result": "OK"}'
 
 while True:
 
-	def on_message(client, userdata, message):
-		print("message: ",str(message.payload.decode("utf-8")))
-		print("topic: ",message.topic)
+	#def on_message(client, userdata, message):
+	#	print("message: ",str(message.payload.decode("utf-8")))
+	#	print("topic: ",message.topic)
 
 
 #Client(client_id="", clean_session=True, userdata=None, protocol=MQTTv311, transport=tcp)
