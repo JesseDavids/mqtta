@@ -14,7 +14,11 @@ Version = 1
 
 path = ""
 dirname = os.path.dirname(__file__)
-plugin_path = "/home/dankninja/Documents/mqtta-project/plugin/bin/enabled"
+p_p = os.getcwd()
+#print(p_p)
+#plugin_path = "/home/dankninja/Documents/mqtta-project/plugin/bin/enabled"
+plugin_path = p_p+"/enabled"
+
 #filename = os.path.join(dirname, plugin_path)
 plugin_file = os.listdir(plugin_path)
 plugin_list = []
@@ -35,7 +39,7 @@ for x in plugin_list:
 			if "#!/usr/bin/env python3" and "#mqtta version {}".format(Version) in line:
 				for m in plugin_list:
 					m = "{}".format(x[0:-3])
-										
+					
 					if m.endswith("_plugin"):
 						module_list = []
 						module_list.append('enabled.'+m)
@@ -43,10 +47,10 @@ for x in plugin_list:
 						def func1():
 							while True:
 								str1 = " ".join(module_list)
-								print(str1)
 								globals()[str1] = importlib.import_module(str1)
-								
-								time.sleep(1)
+								#adjust time.
+								time.sleep(0.05)
+							quit()
 
 						if __name__ == '__main__':
 							proc1 = Process(target = func1)
@@ -56,6 +60,5 @@ for x in plugin_list:
 				#print("{}".format(x) + " not found")            
 				break;
 	quit()
-
 
 filehandle.close()

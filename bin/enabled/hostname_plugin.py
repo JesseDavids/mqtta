@@ -14,7 +14,9 @@ import json
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s:%(levelname)s:%(name)s:%(message)s')
-file_handler = logging.FileHandler('/var/log/mqtta.log')
+p_p = os.getcwd()
+file_handler = logging.FileHandler(p_p + "/mqtta.log")
+#print(file_handler)
 file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 

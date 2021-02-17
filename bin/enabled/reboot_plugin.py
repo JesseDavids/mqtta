@@ -14,7 +14,8 @@ import json
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s:%(levelname)s:%(name)s:%(message)s')
-file_handler = logging.FileHandler('/var/log/mqtta.log')
+p_p = os.getcwd()
+file_handler = logging.FileHandler(p_p + "/mqtta.log")
 file_handler.setFormatter(formatter)
 logger.addHandler(file_handler)
 
@@ -48,7 +49,7 @@ while True:
 	client.on_message = on_message
 
 	client.loop_start()
-	time.sleep(0.5)
+	time.sleep(0.05)
 	client.disconnect()
 
 quit()
