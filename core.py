@@ -65,10 +65,12 @@ class MyApp:
             client.subscribe(f"{ip}/mqtt", 2)
             client.loop_start()
 
-
             def on_message(client, userdata, message):
                 m = str(message.payload.decode("utf-8"))
                 topic = message.topic
+
+                #variable used to pick plugin                
+                MyApp.run.m2 = m.split()[0]
 
                 m1 = m
                 #m3 used to split string
@@ -81,8 +83,7 @@ class MyApp:
                 #variable to change ping settings
                 MyApp.run.pingSetting = m3
 
-                #variable used to pick plugin                
-                MyApp.run.m2 = m.split()[0]
+                
                 self.msg = MyApp.run.m2
                 
                 for plugin in self._plugins:

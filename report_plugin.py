@@ -9,7 +9,6 @@ import paho.mqtt.client as mqtt
 class Plugin:
     
     def process(self):
-        print("ok")
 
         f = utility.Utility()
         system = f.system()
