@@ -4,14 +4,14 @@ import subprocess
 import time
 import logging
 import os
+import json
 import core
-#import paho.mqtt.client as mqtt
 
 class Utility:
     logText = ""
     broker = ""
 
-    def util(self, hostname, cpu_usage, ram_usage, ipAddr, storage_used_total, used_percentage2, res, logText, pingSet, changeHostname):
+    def util(self, trace_routes, hostname, cpu_usage, ram_usage, ipAddr, storage_used_total, used_percentage2, res, logText, DynamicVar, changeHostname):
         self.hostname = hostname
         self.cpu_usage = cpu_usage
         self.ram_usage = ram_usage
@@ -20,8 +20,15 @@ class Utility:
         self.used_percentage2 = used_percentage2
         self.res = res
         self.logText = logText
-        self.pingSet = pingSet
+        self.DynamicVar = DynamicVar
         self.changeHostname = changeHostname
+        self.trace_routes = trace_routes
+
+    def trace(self):
+        p = core.MyApp()
+        m = p.run.trace_route_target
+        self.trace_routes = m
+        return self.trace_routes
 
     def changehostname(self):
         p = core.MyApp()
@@ -29,11 +36,11 @@ class Utility:
         self.changeHostname = m
         return self.changeHostname
 
-    def ping(self):
+    def DynamicVariable(self):
         p = core.MyApp()
-        m = p.run.pingSetting
-        self.pingSet = m
-        return self.pingSet
+        m = p.run.DynamicVar
+        self.DynamicVar = m
+        return self.DynamicVar
         
     def host(self):
         self.hostname = socket.gethostname()
@@ -103,22 +110,16 @@ class Utility:
         strg = u.storage()
         up = u.uptime()
 
-        system = {}
-        system['system info'] = []
-        system['system info'].append({
-            'Hostname': hostt,
-            'IP': ip,
-            'CPU usage': cpu,
-            'MEM usage': ram,
-            'Storage': strg,
-            'SystemUptime': up})
-        self.system = system
+        #system = {}
+        #system['system info'] = []
+        system = {
+            "Hostname": f'{hostt}',
+            "IP": f'{ip}',
+            "CPU usage": f'{cpu}',
+            "MEM usage": f'{ram}',
+            "Storage": f'{strg}',
+            "SystemUptime": f'{up}'
+            }
+        json_system = json.dumps(system)
+        self.system = json_system
         return self.system
-        #print(str(system))
-
-
-#u = Utility()
-#u.log()
-#u.system()
-
-

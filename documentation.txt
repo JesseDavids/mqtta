@@ -1,0 +1,10 @@
+PROCESS:
+
+update and upgrade the system
+install pip3
+install requirements.txt file with pip3
+
+
+TODO:
+
+set up config file, to set the broker and log file

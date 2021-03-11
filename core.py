@@ -1,6 +1,5 @@
 import importlib
 import os
-import multiprocessing
 import paho.mqtt.client as mqtt
 import utility as utility
 import time
@@ -40,7 +39,6 @@ class MyApp:
                             break
                     if plugins != []:
                         #create a list of plugins
-
                         self._plugins = [
                             #import the module and initialise it at the same time
                             importlib.import_module(plugin,".").Plugin() for plugin in plugins
@@ -49,51 +47,45 @@ class MyApp:
             break
         
         filehandle.close()
-
         
     def run(self):
         
         f = utility.Utility()
         ip = f.ip()
+        hostname = f.host()
         
         while True:
             #print("Starting..")
             broker = "192.168.124.147"
-            
             client = mqtt.Client(ip)
             client.connect(broker)
-            client.subscribe(f"{ip}/mqtt", 2)
+            client.subscribe("#", 2)
             client.loop_start()
-
+            #the on_message function comes from the paho library
             def on_message(client, userdata, message):
                 m = str(message.payload.decode("utf-8"))
                 topic = message.topic
-
-                #variable used to pick plugin                
-                MyApp.run.m2 = m.split()[0]
-
-                m1 = m
-                #m3 used to split string
-                m3 = m1.split(' ',1)[1]
-
-                #variable to change hostname
-                m4 = m3
-                MyApp.run.hostname = m4
-
-                #variable to change ping settings
-                MyApp.run.pingSetting = m3
-
+                #get second word which will be hostname
+                N = 2
+                secondWord = topic.split("/")[N-1]
                 
-                self.msg = MyApp.run.m2
-                
-                for plugin in self._plugins:
-                    p = str(plugin)
-                    p2 = p.split(".")[0]
-                    p3 = (p2[1:])
-                    #print(p3)
-                
-                    if p3 == self.msg:
-                        plugin.process()
+                if (secondWord == hostname):
+                    #variable used to pick plugin                
+                    MyApp.run.m2 = topic.split('/')[-1]
+
+                    m1 = m
+                    MyApp.run.DynamicVar = m1
+                    
+                    self.msg = MyApp.run.m2
+                    
+                    for plugin in self._plugins:
+                        p = str(plugin)
+                        p2 = p.split(".")[0]
+                        p3 = (p2[1:])
+                        #print(p3)
+                    
+                        if p3 == self.msg:
+                            plugin.process()
 
             client.on_message = on_message
             #client.loop_start()

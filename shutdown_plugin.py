@@ -10,6 +10,7 @@ class Plugin:
                 
         f = utility.Utility()
         ip = f.ip()
+        hostname = f.host()
 
         while True:
             
@@ -17,8 +18,8 @@ class Plugin:
             client = mqtt.Client(ip)
             client.connect(broker)
             client.loop_start()
-            client.publish(f"workstation/{ip}/n/shutdown", "shutting down", 2, False)
-            setattr(f, "logText", f"Shutting down pc {ip}")
+            client.publish(f"workstation/{hostname}/n/shutdown", "shutting down", 2, False)
+            setattr(f, "logText", f"Shutting down pc {hostname}")
             time.sleep(2)
             f.log()
             os.system("shutdown -h now")

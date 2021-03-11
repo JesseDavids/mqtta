@@ -4,30 +4,34 @@ import utility as utility
 import time
 from core import MyApp
 import paho.mqtt.client as mqtt
-
-
 class Plugin:
     
     def process(self):
-
+        #instantiate the utility file
         f = utility.Utility()
+        #get system information
         system = f.system()
+        #get ip address
         ip = f.ip()
+        hostname = f.host()
 
-        #topic = f"workstation/{ip}/n/report"
-
-        while True:    
+        while True:
+            #set broker address    
             broker = "192.168.124.147"
-            ip = f.ip()
+            #set client, should be unique
             client = mqtt.Client(ip)
+            #connect to broker
             client.connect(broker)
-            #client.subscribe(f"workstation/{ip}/r/report", 2, )
+            #begin client loop
             client.loop_start()
-
-            client.publish(f"workstation/{ip}/n/report", str(system), 2, False)
+            #publish information to topic
+            client.publish(f"workstation/{hostname}/n/report", str(system), 2, False)
+            #set log file contents
             setattr(f, "logText", str(system))
             f.log()
-            #client.loop_start()
+            #sleep for 0.5 seconds
             time.sleep(0.5)
+            #disconnect client
             client.disconnect()
+            #quit loop
             quit()
