@@ -18,7 +18,7 @@ class Plugin:
             client.connect(broker)
             client.loop_start()
             os.system(f"hostnamectl set-hostname {DV} --static")
-            client.publish(f"workstation/{hostname}/n/setting/hostname_new", f"Hostname changed successfully to {hostname} ", 2, False)
+            client.publish(f"workstation/{hostname}/n/setting/hostname_new", f"Hostname changed successfully to {DV} ", 2, False)
             setattr(f,"logText", f"Hostname changed to, {hostname}")
             f.log()
             break
