@@ -69,13 +69,13 @@ class MyApp:
                 N = 2
                 secondWord = topic.split("/")[N-1]
                 
-                if (secondWord == hostname):
+                if (secondWord == hostname or secondWord == ip):
                     #variable used to pick plugin                
                     MyApp.run.m2 = topic.split('/')[-1]
 
                     m1 = m
                     MyApp.run.DynamicVar = m1
-                    
+
                     self.msg = MyApp.run.m2
                     
                     for plugin in self._plugins:
