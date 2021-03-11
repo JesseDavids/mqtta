@@ -24,7 +24,7 @@ class Plugin:
             client = mqtt.Client(ip)    
             client.connect(broker)
             client.loop_start()
-            traceroute_result = subprocess.run([f'traceroute', '{DV}'], stdout=subprocess.PIPE)
+            traceroute_result = subprocess.run(['traceroute', f'{DV}'], stdout=subprocess.PIPE)
             rt = traceroute_result.stdout.decode('utf-8')   
             client.publish(f"workstation/{hostname}/n/traceroute", str(rt), 2, False)
             setattr(f, 'logText', str(rt))
