@@ -8,10 +8,10 @@ import json
 import core
 
 class Utility:
+    
     logText = ""
-    broker = ""
-
-    def util(self, trace_routes, hostname, cpu_usage, ram_usage, ipAddr, storage_used_total, used_percentage2, res, logText, DynamicVar, changeHostname):
+    
+    def util(self, trace_routes, hostname, cpu_usage, ram_usage, ipAddr, storage_used_total, used_percentage2, res, logText, DynamicVar, changeHostname, setBroker, logFile):
         self.hostname = hostname
         self.cpu_usage = cpu_usage
         self.ram_usage = ram_usage
@@ -23,6 +23,25 @@ class Utility:
         self.DynamicVar = DynamicVar
         self.changeHostname = changeHostname
         self.trace_routes = trace_routes
+        self.setBroker = setBroker
+        self.logFile = logFile
+
+    def broker(self):
+        filename = "setup.config"
+        contents = open(filename).read()
+        config = eval(contents)
+        broker = config['broker']
+        self.setBroker = broker
+        return(self.setBroker)
+
+    #def logFilePath(self):
+    #    filename = "setup.config"
+    #    contents = open(filename).read()
+    ##    config = eval(contents)
+    #    logPath = config['logFile']
+    #    self.logFile = logPath
+    #    return(self.logFile)
+        
 
     def trace(self):
         p = core.MyApp()
@@ -61,7 +80,7 @@ class Utility:
 
 
     def ram(self):        
-        self.ram_usage = str(psutil.virtual_memory().percent) + " %"
+        self.ram_usage = str(psutil.virtual_memory().percent) + "%"
         return self.ram_usage
 
 
@@ -71,10 +90,10 @@ class Utility:
         used = (hdd.used / (2**30))
         format_total = '{0:.3g}'.format(total)
         format_used = '{0:.3g}'.format(used)
-        self.storage_used_total = str(format_used) + " GB" + " / " + str(format_total) + " GB"
+        self.storage_used_total = str(format_used) + "GB" + " " + str(format_total) + "GB"
         used_percentage = float(format_used) / float(format_total) * 100
         self.used_percentage2 = '{0:.3g}'.format(used_percentage)
-        strg = str(self.storage_used_total + " / " + self.used_percentage2 + " %" + " used ")
+        strg = str(self.storage_used_total + " " + self.used_percentage2 + "%" + "used")
         return strg
 
 
@@ -87,18 +106,31 @@ class Utility:
 
 
     def log(self):
+
+        filename = "setup.config"
+        contents = open(filename).read()
+        config = eval(contents)
+        loglocation = config['logFile']
+        self.logFile = loglocation
+        #print(self.logFile)
+        #return(self.logFile)
         
         logger = logging.getLogger(__name__)
 
         logger.setLevel(logging.INFO)
         formatter = logging.Formatter('%(asctime)s:%(levelname)s:%(name)s:%(message)s')
-        p_p = os.getcwd()
-        file_handler = logging.FileHandler(p_p + "/mqtta.log")
+        #p_p = os.getcwd()
+        #print(p_p)
+        #file_handler = logging.FileHandler(p_p + "/mqtta.log")
+        file_handler = logging.FileHandler(self.logFile + "/mqtta.log")
         file_handler.setFormatter(formatter)
         logger.addHandler(file_handler)
         #logger.info(str(system))
         #return self.logText
         logger.info(str(self.logText))
+
+    #def setLogLocation(self):
+        
 
 
     def system(self):
@@ -120,6 +152,6 @@ class Utility:
             "Storage": f'{strg}',
             "SystemUptime": f'{up}'
             }
-        json_system = json.dumps(system)
+        json_system = json.dumps(system, indent=4)
         self.system = json_system
         return self.system

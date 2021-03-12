@@ -10,10 +10,11 @@ class Plugin:
         f = utility.Utility()
         ip = f.ip()
         hostname = f.host()
+        BROKER = f.broker()
         DV = f.DynamicVariable()
         while True:
                 
-            broker = "192.168.124.147"
+            broker = BROKER
             client = mqtt.Client(ip)
             client.connect(broker)
             client.loop_start()

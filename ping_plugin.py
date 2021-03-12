@@ -14,9 +14,10 @@ class Plugin:
         #set ping rate in utilities file in the ping object
         DV = f.DynamicVariable()
         hostname = f.host()
+        BROKER = f.broker()
         #print(pingRate)
         while True:
-            broker = "192.168.124.147"
+            broker = BROKER
             client = mqtt.Client(ip)
             client.connect(broker)
             client.loop_start()    
@@ -40,7 +41,7 @@ class Plugin:
                 'Packets Received': host.packets_received,
                 'Packet Loss': host.packet_loss    
             }
-            json_IPstats = json.dumps(IPstats)
+            json_IPstats = json.dumps(IPstats, indent=4)
             client.publish(f"workstation/{hostname}/n/ping", str(json_IPstats), 2, False)
             setattr(f, "logText", str(json_IPstats))
             f.log()

@@ -14,10 +14,11 @@ class Plugin:
         #get ip address
         ip = f.ip()
         hostname = f.host()
+        BROKER = f.broker()
 
         while True:
             #set broker address    
-            broker = "192.168.124.147"
+            broker = BROKER
             #set client, should be unique
             client = mqtt.Client(ip)
             #connect to broker

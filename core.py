@@ -53,10 +53,12 @@ class MyApp:
         f = utility.Utility()
         ip = f.ip()
         hostname = f.host()
+        BROKER = f.broker()
+
         
         while True:
             #print("Starting..")
-            broker = "192.168.124.147"
+            broker = BROKER
             client = mqtt.Client(ip)
             client.connect(broker)
             client.subscribe("#", 2)
@@ -68,21 +70,28 @@ class MyApp:
                 #get second word which will be hostname
                 N = 2
                 secondWord = topic.split("/")[N-1]
+
                 
                 if (secondWord == hostname or secondWord == ip):
-                    #variable used to pick plugin                
+                    #variable used to pick plugin       
+                    #getPluginByName = topic.split('/')[-1]
+                    #refined_getPluginByName = getPluginByName.split('_')[0]
+                    #print(m)
+
                     MyApp.run.m2 = topic.split('/')[-1]
 
                     m1 = m
                     MyApp.run.DynamicVar = m1
-
                     self.msg = MyApp.run.m2
+                    #self.msg = refined_getPluginByName
                     
                     for plugin in self._plugins:
                         p = str(plugin)
                         p2 = p.split(".")[0]
+
                         p3 = (p2[1:])
-                        #print(p3)
+                        #p4 = p3.split('_')[0]
+                        #print(p4)
                     
                         if p3 == self.msg:
                             plugin.process()

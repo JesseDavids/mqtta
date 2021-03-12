@@ -12,8 +12,9 @@ class Plugin:
 		#while True:
 		ip = f.ip()
 		hostname = f.host()
+		BROKER = f.broker()
 		while True:
-			broker = "192.168.124.147"
+			broker = BROKER
 			client = mqtt.Client(ip)
 			client.connect(broker)
 			client.loop_start()
