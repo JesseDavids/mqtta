@@ -97,31 +97,18 @@ class Utility:
 
 
     def log(self):
-
         filename = "setup.config"
         contents = open(filename).read()
         config = eval(contents)
         loglocation = config['logFile']
         self.logFile = loglocation
-        #print(self.logFile)
-        #return(self.logFile)
-        
         logger = logging.getLogger(__name__)
-
         logger.setLevel(logging.INFO)
         formatter = logging.Formatter('%(asctime)s:%(levelname)s:%(name)s:%(message)s')
-        #p_p = os.getcwd()
-        #print(p_p)
-        #file_handler = logging.FileHandler(p_p + "/mqtta.log")
         file_handler = logging.FileHandler(self.logFile + "/mqtta.log")
         file_handler.setFormatter(formatter)
         logger.addHandler(file_handler)
-        #logger.info(str(system))
-        #return self.logText
         logger.info(str(self.logText))
-
-    #def setLogLocation(self):
-        
 
 
     def system(self):
@@ -133,8 +120,6 @@ class Utility:
         strg = u.storage()
         up = u.uptime()
 
-        #system = {}
-        #system['system info'] = []
         system = {
             "Hostname": f'{hostt}',
             "IP": f'{ip}',

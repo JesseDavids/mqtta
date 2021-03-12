@@ -5,7 +5,6 @@ import utility as utility
 import time
 
 class MyApp:
-
     _plugins = []
     # we are going to receive a list of plugins as parameter
     def __init__(self, plugins:list=[], msg=str, tpc=str):
@@ -54,7 +53,6 @@ class MyApp:
         ip = f.ip()
         hostname = f.host()
         BROKER = f.broker()
-
         
         while True:
             #print("Starting..")
@@ -70,7 +68,6 @@ class MyApp:
                 #get second word which will be hostname
                 N = 2
                 secondWord = topic.split("/")[N-1]
-
                 
                 if (secondWord == hostname or secondWord == ip):
                     #variable used to pick plugin       
@@ -79,7 +76,6 @@ class MyApp:
                     #print(m)
 
                     MyApp.run.m2 = topic.split('/')[-1]
-
                     m1 = m
                     MyApp.run.DynamicVar = m1
                     self.msg = MyApp.run.m2

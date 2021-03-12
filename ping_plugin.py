@@ -15,7 +15,7 @@ class Plugin:
         DV = f.DynamicVariable()
         hostname = f.host()
         BROKER = f.broker()
-        #print(pingRate)
+        
         while True:
             broker = BROKER
             client = mqtt.Client(ip)
@@ -25,8 +25,8 @@ class Plugin:
             ip2 = "1.1.1.1"
             count2 = "4"
             interval2 = "0.5"            
-            #IP / COUNT / INTERVAL 
-            #1.1.1.1 30 0.2
+            
+
             if (DV == ""):
                 host = ping(str(f'{ip2}'), count = int(count2), interval = float(interval2), privileged=False)
             else:
