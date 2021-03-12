@@ -34,15 +34,6 @@ class Utility:
         self.setBroker = broker
         return(self.setBroker)
 
-    #def logFilePath(self):
-    #    filename = "setup.config"
-    #    contents = open(filename).read()
-    ##    config = eval(contents)
-    #    logPath = config['logFile']
-    #    self.logFile = logPath
-    #    return(self.logFile)
-        
-
     def trace(self):
         p = core.MyApp()
         m = p.run.trace_route_target
