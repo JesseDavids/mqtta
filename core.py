@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import importlib
 import os
 import paho.mqtt.client as mqtt
@@ -65,6 +66,12 @@ class MyApp:
             def on_message(client, userdata, message):
                 m = str(message.payload.decode("utf-8"))
                 topic = message.topic
+
+                #get the last last word in a string
+                lastWord = topic.split("/")[-1]
+                MyApp.run.lastWord = lastWord
+                #print(lastWord)
+
                 #get second word which will be hostname
                 N = 2
                 secondWord = topic.split("/")[N-1]
@@ -75,10 +82,13 @@ class MyApp:
                     #refined_getPluginByName = getPluginByName.split('_')[0]
                     #print(m)
 
-                    MyApp.run.m2 = topic.split('/')[-1]
+                    #get last name of string
+                    MyApp.run.m2 = topic.split('/')[-2]
+                    
                     m1 = m
                     MyApp.run.DynamicVar = m1
                     self.msg = MyApp.run.m2
+                    #print(self.msg)
                     #self.msg = refined_getPluginByName
                     
                     for plugin in self._plugins:

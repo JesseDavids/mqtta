@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 #this is a main file which will initialise and execute the run method from the core file
 
 #importing our application file

@@ -11,7 +11,7 @@ class Utility:
     
     logText = ""
     
-    def util(self, trace_routes, hostname, cpu_usage, ram_usage, ipAddr, storage_used_total, used_percentage2, res, logText, DynamicVar, changeHostname, setBroker, logFile):
+    def util(self, trace_routes, hostname, cpu_usage, ram_usage, ipAddr, storage_used_total, used_percentage2, res, logText, DynamicVar, changeHostname, setBroker, logFile, subTopic):
         self.hostname = hostname
         self.cpu_usage = cpu_usage
         self.ram_usage = ram_usage
@@ -25,6 +25,13 @@ class Utility:
         self.trace_routes = trace_routes
         self.setBroker = setBroker
         self.logFile = logFile
+        self.subTopic = subTopic
+
+    def subtopic(self):
+        p = core.MyApp()
+        m = p.run.lastWord
+        self.subTopic = m
+        return self.subTopic
 
     def broker(self):
         filename = "setup.config"
@@ -84,7 +91,8 @@ class Utility:
         self.storage_used_total = str(format_used) + "GB" + " " + str(format_total) + "GB"
         used_percentage = float(format_used) / float(format_total) * 100
         self.used_percentage2 = '{0:.3g}'.format(used_percentage)
-        strg = str(self.storage_used_total + " " + self.used_percentage2 + "%" + "used")
+#        strg = str(self.storage_used_total + " " + self.used_percentage2 + "%" + "used")
+        strg = str(self.used_percentage2 + "%")
         return strg
 
 
