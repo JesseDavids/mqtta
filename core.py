@@ -71,17 +71,12 @@ class MyApp:
                 lastWord = topic.split("/")[-1]
                 MyApp.run.lastWord = lastWord
                 #print(lastWord)
-
                 #get second word which will be hostname
                 N = 2
                 secondWord = topic.split("/")[N-1]
                 
-                if (secondWord == hostname or secondWord == ip):
-                    #variable used to pick plugin       
-                    #getPluginByName = topic.split('/')[-1]
-                    #refined_getPluginByName = getPluginByName.split('_')[0]
-                    #print(m)
-
+                if (secondWord == hostname or secondWord == ip or secondWord == "list_plugin"):
+                    
                     #get last name of string
                     MyApp.run.m2 = topic.split('/')[-2]
                     
@@ -90,18 +85,16 @@ class MyApp:
                     self.msg = MyApp.run.m2
                     #print(self.msg)
                     #self.msg = refined_getPluginByName
-                    
                     for plugin in self._plugins:
                         p = str(plugin)
                         p2 = p.split(".")[0]
-
                         p3 = (p2[1:])
                         #p4 = p3.split('_')[0]
                         #print(p4)
                     
                         if p3 == self.msg:
                             plugin.process()
-
+            
             client.on_message = on_message
             #client.loop_start()
             time.sleep(0.5)

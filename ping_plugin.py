@@ -5,7 +5,6 @@ import time
 import json
 import paho.mqtt.client as mqtt
 from icmplib import ping
-import multiprocessing
 class Plugin:
 
     def process(self):
@@ -26,7 +25,6 @@ class Plugin:
             count2 = "4"
             interval2 = "0.5"            
             
-
             if (DV == ""):
                 host = ping(str(f'{ip2}'), count = int(count2), interval = float(interval2), privileged=False)
             else:
