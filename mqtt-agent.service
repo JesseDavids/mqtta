@@ -3,11 +3,11 @@ Description=mqtt agent Service
 
 [Service]
 Type=simple
-User=root
-Group=root
-WorkingDirectory=/home/jaydavids/Documents/MQTTA-CLONE/mqtta
-ExecStart=/home/jaydavids/Documents/MQTTA-CLONE/mqtta/main.py
-ExecReload=/home/jaydavids/Documents/MQTTA-CLONE/mqtta/main.py
+User=user
+Group=user
+WorkingDirectory=/PATH/TO/WORKINGDIRECTORY
+ExecStart=/PATH/TO/MAIN/PRORAM
+ExecReload=/PATH/TO/MAIN/PRORAM
 Restart=always
 RestartSec=3
 
