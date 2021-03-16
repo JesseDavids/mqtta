@@ -6,8 +6,8 @@ Type=simple
 User=user
 Group=user
 WorkingDirectory=/PATH/TO/WORKINGDIRECTORY
-ExecStart=/PATH/TO/MAIN/PRORAM
-ExecReload=/PATH/TO/MAIN/PRORAM
+ExecStart=/PATH/TO/MAIN/PROGRAM
+ExecReload=/PATH/TO/MAIN/PROGRAM
 Restart=always
 RestartSec=3
 
