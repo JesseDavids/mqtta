@@ -7,6 +7,7 @@ import paho.mqtt.client as mqtt
 
 class Plugin:
     def process(self):
+
         utilities = utility.Utility()
         ipAddress = utilities.ip()
         DV = utilities.DynamicVariable()
@@ -18,7 +19,6 @@ class Plugin:
             client = mqtt.Client(ipAddress)
             client.connect(broker)
             client.loop_start() 
-
             client.publish("workstation/list", str(hostname + ": " + ipAddress), 2, False)
             
             break

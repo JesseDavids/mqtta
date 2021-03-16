@@ -1,5 +1,5 @@
 [Unit]
-Description=Mqtt agent Service
+Description=mqtt agent Service
 
 [Service]
 Type=simple
