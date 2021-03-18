@@ -9,7 +9,7 @@ Windows version coming soon...
    - report_plugin (this plugin reports your system information back to you)
    - hostname_plugin (this plugin allows you to change your hostname)
    - ping_plugin (This plugin lets you ping a specific IP address)
-   - traceroute_plugin (Enjoy traceroute to a website or IP address)
+   - traceroute_plugin (Enjoy traceroute to a website or IP address, in order to use this plugin you need to install traceroute on your computer `sudo apt install traceroute`.
    - reboot_plugin (Remotely reboot your system)
    - shutdown_plugin (Or shut it down completely)
    - list_plugin (this plugin lists all available computers connected to the broker, when used, all computers return their hostname and ip address)
