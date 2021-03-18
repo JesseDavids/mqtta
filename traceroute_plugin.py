@@ -8,10 +8,6 @@ from io import StringIO
 """
 This plugin requires you to 'sudo apt install traceroute', currently just working on LINUX
 ------------------------------
-HOW TO USE THE PLUGIN ->
-command: f"traceroute {address}"
-i.e: "traceroute 192.168.0.1"
-------------------------------
 """
 class Plugin:
     def process(self):

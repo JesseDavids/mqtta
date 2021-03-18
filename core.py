@@ -4,31 +4,38 @@ import os
 import paho.mqtt.client as mqtt
 import utility as utility
 import time
-
+##Main Class
 class MyApp:
     _plugins = []
-    # we are going to receive a list of plugins as parameter
+    # we are going to receive a list of plugins, messages and topics as parameters
     def __init__(self, plugins:list=[], msg=str, tpc=str):
         self.msg = msg
         self.tpc = tpc
-
+        
         Version = 1
         dirname = os.path.dirname(__file__)
+        #get current working directory
         p_p = os.getcwd()
+        #list all items in the directory
         plug_file = os.listdir(p_p)
+        #create a list of plugs
         plug = []
 
         for f in plug_file:
             if f.endswith("_plugin.py"):
+                #append all plugins to the list
                 plug.append(f)
-                #print(f)
+                
         for x in plug:
+            #x is going to be the plugin, so its the file path + plugin name then open it
             filepath = p_p+"/"+x
             filehandle = open(filepath, 'r')            
             while True:                    
                 line = filehandle.readline()
                 line = filehandle.readline()
                 for x in (plug):
+                    #if these conditions are met in the plugin file it may proceed
+                    #it gets the extention .py chopped off and appended to a new list
                     if "#!/usr/bin/env python3" and "#mqtta version {}".format(Version) in line:
                         for m in plug:
                             m = "{}".format(x[0:-3])
@@ -37,6 +44,8 @@ class MyApp:
                                 plugins.append(m)
                                 
                             break
+                    #if the plugins is not empty, create a new list with initialised objects with classes .Plugin()
+                    #to the self variable (self._plugins)
                     if plugins != []:
                         #create a list of plugins
                         self._plugins = [
@@ -49,53 +58,75 @@ class MyApp:
         filehandle.close()
         
     def run(self):
-        
+        #This is our main function called run and im instantiating objects from the utility file
         f = utility.Utility()
         ip = f.ip()
         hostname = f.host()
         BROKER = f.broker()
         
         while True:
-            #print("Starting..")
+            #set the function up for mqtt communication and set subscription
             broker = BROKER
+            #i used the ip address to make it unique, you can add anything you want but it must be unique
             client = mqtt.Client(ip)
+            #connect client to broker
             client.connect(broker)
+            #set subscribtion
             client.subscribe("#", 2)
+            #start the loop
             client.loop_start()
-            #the on_message function comes from the paho library
+            #the on_message function comes from the paho library and waits for any incoming
+            #messages from said subscribe topic
             def on_message(client, userdata, message):
                 m = str(message.payload.decode("utf-8"))
                 topic = message.topic
 
-                #get the last last word in a string
+                #exmaple topics:
+                #workstation/192.168.0.1/read/report_plugin/    <-------- note the last slash
+                #device/username/write/ping_plugin/  and the message -m "IP / Count / Interval
+                #Each plugin has its own instructions
+
+                #When creating plugins it should qualify by having the shabang, version and "_plugin.py" extention
+                #Note: Version should match the core version
+
+
+
+                #get the last word in a string which will specify the subtopic
                 lastWord = topic.split("/")[-1]
                 MyApp.run.lastWord = lastWord
-                #print(lastWord)
-                #get second word which will be hostname
+                
+                #get second word which will be hostname or IP address
                 N = 2
                 secondWord = topic.split("/")[N-1]
                 
                 if (secondWord == hostname or secondWord == ip or secondWord == "list_plugin"):
+                    #when using list_plugin
+                    #example: (workstations/list_plugin/)
+                    #it will list all devices connected to the broker you set in Config file
                     
                     #get last name of string
                     MyApp.run.m2 = topic.split('/')[-2]
-                    
+                    #the dynamic var is to take whatever is sent as a message and 
+                    #pass it through to the utility file then back to the desired plugin for use
                     m1 = m
                     MyApp.run.DynamicVar = m1
+                    #assigning the topic to the message self.msg variable
                     self.msg = MyApp.run.m2
-                    #print(self.msg)
-                    #self.msg = refined_getPluginByName
+                    
+                    #refactoring the plugin name to just name_plugin
                     for plugin in self._plugins:
                         p = str(plugin)
                         p2 = p.split(".")[0]
                         p3 = (p2[1:])
-                        #p4 = p3.split('_')[0]
-                        #print(p4)
-                    
+                        
+                        #then import that specific plugin
+                        #once plugin is called, whatever is in the plugin will execute. Or should be used in that way.
                         if p3 == self.msg:
                             plugin.process()
             
+            #attach the function to the client
             client.on_message = on_message
-            #client.loop_start()
+            #you can set this to your liking, for active listening i suggest 0.5 seconds
             time.sleep(0.5)
+            #then disconnect
             client.disconnect()
