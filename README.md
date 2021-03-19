@@ -24,7 +24,7 @@ Windows version coming soon...
 
 - Ensure the `mqtt broker`, and `pip3` is installed before proceeding with these tasks
   - Follow these links on how to do that:
-    - http://www.steves-internet-guide.com/install-mosquitto-linux/
+    - and use this command to install the client broker `sudo apt install mosquitto-clients`
     - https://linuxize.com/post/how-to-install-pip-on-ubuntu-18.04/
 - _____________________________________________________________________________________________________________________________
 - Create a folder in your `Documents folder` (or wherever) and pull the repo into that folder then `cd` into it
