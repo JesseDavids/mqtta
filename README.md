@@ -35,6 +35,7 @@ Windows version coming soon...
 - Open the service file and edit it to your environment with `nano mqtt-agent.service`
 - Save the service file in the `/etc/systemd/system/` directory
 - Then run this command `systemctl start mqtt-agent.service`
+- Refresh daemon with `systemctl daemon-reload`
 - If you would like the service to start on boot run this command after the above command, `systemctl enable mqtt-agent.service`
 - Restart the service with, `systemctl restart mqtt-agent.service` then check the status, `systemctl status mqtt-agent.service`
 
