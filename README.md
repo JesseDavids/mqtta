@@ -26,18 +26,19 @@ Windows version coming soon...
   - Follow these links on how to do that:
     - and use this command to install the client broker `sudo apt install mosquitto-clients`
     - https://linuxize.com/post/how-to-install-pip-on-ubuntu-18.04/
+    - NOTE: Pip comes with the installation of python3.X
 - _____________________________________________________________________________________________________________________________
 - Create a folder in your `Documents folder` (or wherever) and pull the repo into that folder then `cd` into it
 - Install any requirements from the requirements.txt file `pip3 install -r requirements.txt`(My current version of pip is 20.0.2)
 - Open the config file `setup.config` and edit the broker IP address and file path to save the logs
 - You can run it in two ways, firstly, you can type in the terminal `./main.py` and run it like that, or
-- You could run it as a `service`, to do this i made a `.service` file with basic configurations called `mqtt-agent.service`.
-- Open the service file and edit it to your environment with `nano mqtt-agent.service`
+- You could run it as a `service`, to do this i made a `.service` file with basic configurations called `mqtta.service`.
+- Open the service file and edit it to your environment with `nano mqtta.service`
 - Save the service file in the `/etc/systemd/system/` directory
-- Then run this command `systemctl start mqtt-agent.service`
+- Then run this command `systemctl start mqtta.service`
 - Refresh daemon with `systemctl daemon-reload`
-- If you would like the service to start on boot run this command after the above command, `systemctl enable mqtt-agent.service`
-- Restart the service with, `systemctl restart mqtt-agent.service` then check the status, `systemctl status mqtt-agent.service`
+- If you would like the service to start on boot run this command after the above command, `systemctl enable mqtta.service`
+- Restart the service with, `systemctl restart mqtta.service` then check the status, `systemctl status mqtta.service`
 
 
 ## After everything is set and configured, let's test it
@@ -46,6 +47,9 @@ Windows version coming soon...
   - (-t) this is the topic we are subscribing to, and `# = hash` means everything, so we will receive any message that comes through
 
 - 3 parameters exist, `(n = notice, r = read, w = write)`
+  - notice is something that the plugin wants to tell you.
+  - read is when you want information from a plugin.
+  - and to write to the plugin, like a message, you determine how the plugin will respond.
 
 - open another terminal and type `mosquitto_pub -h 127.0.0.1 -t "workstation/your-hostname/parameter/report_plugin/ -m ""`
   - expected output:
