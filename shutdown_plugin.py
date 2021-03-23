@@ -4,7 +4,10 @@ import utility as utility
 import time
 import os
 import paho.mqtt.client as mqtt
-
+"""
+topic = workstation/pc1/w/shutdown/
+message = ""
+"""
 class Plugin:
     def process(self):
                 
@@ -19,7 +22,7 @@ class Plugin:
             client = mqtt.Client(ip)
             client.connect(broker)
             client.loop_start()
-            client.publish(f"workstation/{hostname}/n/shutdown", "shutting down", 2, False)
+            client.publish(f"workstation/{hostname}/n/shutdown", f"shutting down {hostname}", 2, False)
             setattr(f, "logText", f"Shutting down pc {hostname}")
             time.sleep(2)
             f.log()

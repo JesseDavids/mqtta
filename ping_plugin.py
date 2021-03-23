@@ -7,6 +7,11 @@ import paho.mqtt.client as mqtt
 from icmplib import ping
 class Plugin:
 
+    #How to use this plugin
+    #(workstation/hostname/parameter/plugin/)
+    #topic = workstation/pc1/r/ping_plugin/
+    #message = "" OR message = "1.1.1.1 15 0.2" (ip to ping / count / interval)
+
     def process(self):
         f = utility.Utility()
         ip = f.ip()

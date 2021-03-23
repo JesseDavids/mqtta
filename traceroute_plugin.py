@@ -8,6 +8,8 @@ from io import StringIO
 """
 This plugin requires you to 'sudo apt install traceroute', currently just working on LINUX
 ------------------------------
+i.e (workstation/pc1/w/traceroute_plugin/)
+message = IP or web name to traceroute such as www.google.com
 """
 class Plugin:
     def process(self):

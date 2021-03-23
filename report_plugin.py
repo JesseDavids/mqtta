@@ -4,6 +4,18 @@ import utility as utility
 import time
 from core import MyApp
 import paho.mqtt.client as mqtt
+
+"""
+topic = workstation/pc/r/report_plugin/   <-------- this retrieves all below information in one json string
+topic = workstation/pc/r/report_plugin/ip
+topic = workstation/pc/r/report_plugin/memory
+topic = workstation/pc/r/report_plugin/hostname
+topic = workstation/pc/r/report_plugin/storage
+topic = workstation/pc/r/report_plugin/uptime
+topic = workstation/pc/r/report_plugin/cpu
+topic = workstation/pc/r/report_plugin/help
+message = ""
+"""
 class Plugin:
     
     def process(self):

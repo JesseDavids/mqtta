@@ -5,6 +5,10 @@ import time
 import json
 import paho.mqtt.client as mqtt
 
+"""
+topic = workstation/list_plugin/
+lists all active devices listening to specified broker IP
+"""
 class Plugin:
     def process(self):
 

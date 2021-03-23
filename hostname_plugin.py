@@ -4,6 +4,11 @@ import utility as utility
 import time
 import paho.mqtt.client as mqtt
 import os
+
+"""
+topic = (workstation/pc1/w/hostname_plugin/)
+message = new hostname (pc2)
+"""
 class Plugin:
 
     def process(self):

@@ -82,20 +82,16 @@ class MyApp:
                 topic = message.topic
 
                 #exmaple topics:
-                #workstation/192.168.0.1/read/report_plugin/    <-------- note the last slash
-                #device/username/write/ping_plugin/  and the message -m "IP / Count / Interval
+                #workstation/192.168.0.1/r/report_plugin/  
+                #device/username/w/ping_plugin/  and the message -m "IP / Count / Interval
                 #Each plugin has its own instructions
 
                 #When creating plugins it should qualify by having the shabang, version and "_plugin.py" extention
                 #Note: Version should match the core version
 
-
-
-                #get the last word in a string which will specify the subtopic
                 lastWord = topic.split("/")[-1]
                 MyApp.run.lastWord = lastWord
                 
-                #get second word which will be hostname or IP address
                 N = 2
                 secondWord = topic.split("/")[N-1]
                 
@@ -104,13 +100,11 @@ class MyApp:
                     #example: (workstations/list_plugin/)
                     #it will list all devices connected to the broker you set in Config file
                     
-                    #get last name of string
                     MyApp.run.m2 = topic.split('/')[-2]
-                    #the dynamic var is to take whatever is sent as a message and 
-                    #pass it through to the utility file then back to the desired plugin for use
+
                     m1 = m
                     MyApp.run.DynamicVar = m1
-                    #assigning the topic to the message self.msg variable
+
                     self.msg = MyApp.run.m2
                     
                     #refactoring the plugin name to just name_plugin
@@ -119,8 +113,6 @@ class MyApp:
                         p2 = p.split(".")[0]
                         p3 = (p2[1:])
                         
-                        #then import that specific plugin
-                        #once plugin is called, whatever is in the plugin will execute. Or should be used in that way.
                         if p3 == self.msg:
                             plugin.process()
             

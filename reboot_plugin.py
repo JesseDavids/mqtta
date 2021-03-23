@@ -4,6 +4,10 @@ import utility as utility
 import time
 import paho.mqtt.client as mqtt
 import os
+"""
+topic = workstation/pc1/w/reboot/
+message = ""
+"""
 class Plugin:
 
 	def process(self):
@@ -18,7 +22,7 @@ class Plugin:
 			client = mqtt.Client(ip)
 			client.connect(broker)
 			client.loop_start()
-			client.publish(f"workstation/{hostname}/n/reboot", "Rebooting system", 2, False)
+			client.publish(f"workstation/{hostname}/n/reboot", f"Rebooting system {hostname}", 2, False)
 			setattr(f, "logText", "Rebooting System...")
 			f.log()
 			time.sleep(2)
