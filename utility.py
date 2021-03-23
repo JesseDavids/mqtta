@@ -73,12 +73,12 @@ class Utility:
 
 
     def cpu(self):
-        self.cpu_usage = str(psutil.cpu_percent()) + "%"
+        self.cpu_usage = str(psutil.cpu_percent())
         return self.cpu_usage
 
 
     def ram(self):        
-        self.ram_usage = str(psutil.virtual_memory().percent) + "%"
+        self.ram_usage = str(psutil.virtual_memory().percent)
         return self.ram_usage
 
 
@@ -92,7 +92,7 @@ class Utility:
         used_percentage = float(format_used) / float(format_total) * 100
         self.used_percentage2 = '{0:.3g}'.format(used_percentage)
 #        strg = str(self.storage_used_total + " " + self.used_percentage2 + "%" + "used")
-        strg = str(self.used_percentage2 + "%")
+        strg = str(self.used_percentage2)
         return strg
 
 
