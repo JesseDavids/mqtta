@@ -47,9 +47,6 @@ Windows version coming soon...
   - (-t) this is the topic we are subscribing to, and `# = hash` means everything, so we will receive any message that comes through
 
 - 3 parameters exist, `(n = notice, r = read, w = write)`
-  - notice is something that the plugin wants to tell you.
-  - read is when you want information from a plugin.
-  - and to write to the plugin, like a message, you determine how the plugin will respond.
 
 - open another terminal and type `mosquitto_pub -h 127.0.0.1 -t "workstation/your-hostname/parameter/report_plugin/ -m ""`
   - expected output:
