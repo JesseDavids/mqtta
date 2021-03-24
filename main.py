@@ -3,9 +3,11 @@
 
 #importing our application file
 from core import MyApp
+import os, sys
+from tendo import singleton
 
-#while True:
 if __name__ == "__main__":
-    #initialising our application
+    me = singleton.SingleInstance()
+
     app = MyApp()
     app.run()
