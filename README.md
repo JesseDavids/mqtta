@@ -50,11 +50,12 @@ Windows version coming soon...
 
 - open another terminal and type `mosquitto_pub -h 127.0.0.1 -t "workstation/your-hostname/parameter/report/ -m ""`
   - expected output:
-    - ![image](https://user-images.githubusercontent.com/54505758/111478420-bd5f7480-8738-11eb-858e-cbc2e6315e43.png)
+    - ![image](https://user-images.githubusercontent.com/54505758/112264375-77933680-8c79-11eb-9451-363996fdadad.png)
+
 
   - If you want this to work the IP needs to be your own, or another IP on the same network connected to the mqtt broker
   - (-m) this indicates the message you want to send to that particular topic, some plugins do not need a message as the report_plugin
 - Here is another example `mosquitto_pub -h 127.0.0.1 -t "workstation/hostname-or-ip/r/ping/ -m "1.1.1.1 10 0.2"`
   - Note the -m (message). IP {space} Count {space} Interval
-    - ![image](https://user-images.githubusercontent.com/54505758/111478776-0a434b00-8739-11eb-9270-38957ff9e026.png)
-    - 
+    - ![image](https://user-images.githubusercontent.com/54505758/112264275-50d50000-8c79-11eb-96ff-e7209430755a.png)
+
