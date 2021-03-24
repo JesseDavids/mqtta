@@ -95,7 +95,7 @@ class MyApp:
                 N = 2
                 secondWord = topic.split("/")[N-1]
                 
-                if (secondWord == hostname or secondWord == ip or secondWord == "list_plugin"):
+                if (secondWord == hostname or secondWord == ip or secondWord == "list"):
                     #when using list_plugin
                     #example: (workstations/list_plugin/)
                     #it will list all devices connected to the broker you set in Config file

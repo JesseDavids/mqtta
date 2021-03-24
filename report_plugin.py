@@ -31,8 +31,21 @@ class Plugin:
         cpu = f.cpu()
         hostname = f.host()
         
+        Report_Help = (
+            "\nGUIDANCE I SHALL GIVE"
+            "\n"
+            "\nThis plugin will retrieve status information of target PC"
+            "\n"
+            "\ntopic = workstation/hostname-or-ip/parameter/report/   <--- This returns all info"
+            "\n"
+            "\nIf you want individual values, simply add it after the slash, like this"
+            "\n"
+            "\nworkstation/hostname/r/report/cpu"
+            "\nOR workstation/ip/r/report/uptime"
+            "\n"
+            "\nYou can use these options: cpu, memory, storage, uptime, hostname and ip"
+        )
         
-        string_of_report_objects = ("-ip\n-memory\n-storage\n-uptime\n-cpu\n-hostname")
         #variable extracted from topic name
         subT = f.subtopic()
         #broker ip set in setup.config file
@@ -70,7 +83,7 @@ class Plugin:
                 client.publish(f"workstation/{hostname}/n/report/system", str(system), 2, False)
             
             elif(subT == "help"):
-                client.publish(f"workstation/{hostname}/n/report/help", str(string_of_report_objects), 2, False)
+                client.publish(f"workstation/{hostname}/n/report/help", str(Report_Help), 2, False)
             #set log file contents
             setattr(f, "logText", str(system))
             f.log()
