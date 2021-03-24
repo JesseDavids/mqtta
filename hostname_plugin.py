@@ -6,7 +6,7 @@ import paho.mqtt.client as mqtt
 import os
 
 """
-topic = (workstation/pc1/w/hostname_plugin/)
+topic = (workstation/pc1/w/hostname/)
 message = new hostname (pc2)
 """
 class Plugin:

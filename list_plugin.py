@@ -6,7 +6,7 @@ import json
 import paho.mqtt.client as mqtt
 
 """
-topic = workstation/list_plugin/
+topic = workstation/list/
 lists all active devices listening to specified broker IP
 """
 class Plugin:

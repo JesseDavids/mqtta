@@ -13,7 +13,7 @@ Windows version coming soon...
    - reboot_plugin (Remotely reboot your system)
    - shutdown_plugin (Or shut it down completely)
    - list_plugin (this plugin lists all available computers connected to the broker, when used, all computers return their hostname and ip address)
-    - `workstation/list_plugin/`
+    - `workstation/list/`
 
 
 ###### With this information, coupled with good management software such as mqtt explorer the possibilities are endless
@@ -48,12 +48,13 @@ Windows version coming soon...
 
 - 3 parameters exist, `(n = notice, r = read, w = write)`
 
-- open another terminal and type `mosquitto_pub -h 127.0.0.1 -t "workstation/your-hostname/parameter/report_plugin/ -m ""`
+- open another terminal and type `mosquitto_pub -h 127.0.0.1 -t "workstation/your-hostname/parameter/report/ -m ""`
   - expected output:
     - ![image](https://user-images.githubusercontent.com/54505758/111478420-bd5f7480-8738-11eb-858e-cbc2e6315e43.png)
 
   - If you want this to work the IP needs to be your own, or another IP on the same network connected to the mqtt broker
   - (-m) this indicates the message you want to send to that particular topic, some plugins do not need a message as the report_plugin
-- Here is another example `mosquitto_pub -h 127.0.0.1 -t "workstation/hostname-or-ip/r/ping_plugin/ -m "1.1.1.1 10 0.2"`
+- Here is another example `mosquitto_pub -h 127.0.0.1 -t "workstation/hostname-or-ip/r/ping/ -m "1.1.1.1 10 0.2"`
   - Note the -m (message). IP {space} Count {space} Interval
     - ![image](https://user-images.githubusercontent.com/54505758/111478776-0a434b00-8739-11eb-9270-38957ff9e026.png)
+    - 

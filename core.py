@@ -100,20 +100,23 @@ class MyApp:
                     #example: (workstations/list_plugin/)
                     #it will list all devices connected to the broker you set in Config file
                     
-                    MyApp.run.m2 = topic.split('/')[-2]
+                    MyApp.run.m2 = topic.split("/")[-2]
 
                     m1 = m
                     MyApp.run.DynamicVar = m1
 
                     self.msg = MyApp.run.m2
+
+                    someVar = self.msg + "_plugin"
                     
-                    #refactoring the plugin name to just name_plugin
+                    
                     for plugin in self._plugins:
                         p = str(plugin)
                         p2 = p.split(".")[0]
                         p3 = (p2[1:])
                         
-                        if p3 == self.msg:
+                        
+                        if p3 == someVar:
                             plugin.process()
             
             #attach the function to the client

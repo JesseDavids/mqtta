@@ -6,14 +6,14 @@ from core import MyApp
 import paho.mqtt.client as mqtt
 
 """
-topic = workstation/pc/r/report_plugin/   <-------- this retrieves all below information in one json string
-topic = workstation/pc/r/report_plugin/ip
-topic = workstation/pc/r/report_plugin/memory
-topic = workstation/pc/r/report_plugin/hostname
-topic = workstation/pc/r/report_plugin/storage
-topic = workstation/pc/r/report_plugin/uptime
-topic = workstation/pc/r/report_plugin/cpu
-topic = workstation/pc/r/report_plugin/help
+topic = workstation/pc/r/report/   <-------- this retrieves all below information in one json string
+topic = workstation/pc/r/report/ip
+topic = workstation/pc/r/report/memory
+topic = workstation/pc/r/report/hostname
+topic = workstation/pc/r/report/storage
+topic = workstation/pc/r/report/uptime
+topic = workstation/pc/r/report/cpu
+topic = workstation/pc/r/report/help
 message = ""
 """
 class Plugin:
@@ -30,7 +30,7 @@ class Plugin:
         uptime = f.uptime()
         cpu = f.cpu()
         hostname = f.host()
-        #make a list
+        
         
         string_of_report_objects = ("-ip\n-memory\n-storage\n-uptime\n-cpu\n-hostname")
         #variable extracted from topic name
