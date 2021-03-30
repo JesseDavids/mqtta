@@ -33,7 +33,7 @@ Windows version coming soon...
 - Open the config file `setup.config` and edit the broker IP address and file path to save the logs
 - You can run it in two ways, firstly, you can type in the terminal `./main.py` and run it like that, or
 - You could run it as a `service`, to do this i made a `.service` file with basic configurations called `mqtta.service`.
-- Open the service file and edit it to your environment with `nano mqtta.service`
+- Open the service file and edit it to your environment with `sudo nano mqtta.service`, note: `User=` should be your current user. i.e `User=username`
 - Save the service file in the `/etc/systemd/system/` directory
 - Then run this command `systemctl start mqtta.service`
 - Refresh daemon with `systemctl daemon-reload`

@@ -3,8 +3,7 @@ Description=mqtt agent Service
 
 [Service]
 Type=simple
-User=user
-Group=user
+User=mqtta
 WorkingDirectory=/PATH/TO/WORKINGDIRECTORY
 ExecStart=/PATH/TO/MAIN/PROGRAM
 Restart=always
