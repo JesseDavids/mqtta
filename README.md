@@ -24,7 +24,7 @@ Windows version coming soon...
 
 - Ensure the `mqtt broker`, and `pip3` is installed before proceeding with these tasks
   - Follow these links on how to do that:
-    - and use this command to install the client broker `sudo apt install mosquitto-clients`
+    - and use this command to install the client broker `sudo apt install mosquitto`
     - https://linuxize.com/post/how-to-install-pip-on-ubuntu-18.04/
     - NOTE: Pip comes with the installation of python3.X
 - _____________________________________________________________________________________________________________________________
