@@ -2,7 +2,7 @@
 
 ## The program plugin-architecture was created to retrieve information from computers via mqtt
 The program has been tested on ubuntu 20.04 and the lastest Linux Mint as of 03/17/2021
-Windows version coming soon...
+Windows version github.com/JesseDavids/mqtta-win10
 
 ## The program comes with free to use plugins
 
