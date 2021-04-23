@@ -8,7 +8,7 @@ from io import StringIO
 
 
 Traceroute_Help = (
-    "\nGUIDANCE I SHALL GIVE"
+    "\nHOW TO USE THE TRACEROUTE PLUGIN"
     "\n"
     "\nThis plugin will make a traceroute to desired IP or website name"
     "\n"

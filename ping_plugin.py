@@ -7,7 +7,7 @@ import paho.mqtt.client as mqtt
 from icmplib import ping
 
 Ping_Help = (
-    "\nGUIDANCE I SHALL GIVE"
+    "\nHOW TO USE THE PING PLUGIN"
     "\n"
     "\nThis plugin will ping any target PC, with count and interval or default"
     "\n"

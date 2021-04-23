@@ -32,7 +32,7 @@ class Plugin:
         hostname = f.host()
         
         Report_Help = (
-            "\nGUIDANCE I SHALL GIVE"
+            "\nHOW TO USE THE REPORT PLUGIN"
             "\n"
             "\nThis plugin will retrieve status information of target PC"
             "\n"

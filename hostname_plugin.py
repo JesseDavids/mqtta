@@ -10,11 +10,11 @@ topic = (workstation/pc1/w/hostname/)
 message = new hostname (pc2)
 """
 Hostname_Help = (
-    "\nGUIDANCE I SHALL GIVE"
+    "\nHOW TO USE THE HOSTNAME PLUGIN"
     "\n"
     "\nThis plugin will ping any target PC, with count and interval or default"
     "\n"
-    "\nTopic = workstation/hostname-or-ip/parameter/hostname/  <--- plugin requires a message parameter"
+    "\nTopic = workstation/hostname-or-ip/parameter/hostname/ "
     "\ni.e Message = newPC1"
     
 )
@@ -35,7 +35,7 @@ class Plugin:
             client.connect(broker)
             client.loop_start()
             if(subT == "help"):
-                client.publish(f"workstation/{hostname}/n/setting/hostname/help", str(Hostname_Help), 2, False)
+                client.publish(f"workstation/{hostname}/n/hostname/help", str(Hostname_Help), 2, False)
                 quit()
             elif(subT == ""):
                 os.system(f"hostnamectl set-hostname {DV} --static")

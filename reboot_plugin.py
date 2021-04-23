@@ -6,7 +6,7 @@ import paho.mqtt.client as mqtt
 import os
 
 Reboot_Help = (
-    "\nGUIDANCE I SHALL GIVE"
+    "\nHOW TO USE THE REBOOT PLUGIN"
     "\n"
     "\nThis plugin will reboot any target PC"
     "\n"

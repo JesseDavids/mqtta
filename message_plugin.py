@@ -10,10 +10,6 @@ from core import MyApp
 import os
 import paho.mqtt.client as mqtt
 
-"""
-topic = workstation/pc/r/report/
-message = ""
-"""
 
 class Plugin:
     
@@ -27,6 +23,19 @@ class Plugin:
         #broker ip set in setup.config file
         BROKER = f.broker()
         DV = f.DynamicVariable()
+
+        Message_Help = (
+            "\nHOW TO USE THE MESSAGING PLUGIN"
+            "\n"
+            "\nThis plugin will send a message to target PC"
+            "\n"
+            "\nExample Topic: workstation/hostname or ip/parameter/message/"
+            "\nExample message: Your Name / Message"
+            "\n"
+            "\nJohn Doe / We have a meeting at 10AM. Don't be late."
+            "\n"
+            "\nMary / Hi John, need you to work over time tomorrow."
+        )
         
 
         while True:
@@ -44,6 +53,9 @@ class Plugin:
             #getting the date and time
             date = datetime.now()
             dt_string = date.strftime("%d/%m/%Y %H:%M")
+
+            if(subT == "help"):
+                client.publish(f"workstation/{hostname}/n/message/help", str(Message_Help), 2, False)
 
             if(subT == ""):
                 message1 = DV.split("/")[-1]

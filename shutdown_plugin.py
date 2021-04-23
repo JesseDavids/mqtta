@@ -9,7 +9,7 @@ topic = workstation/pc1/w/shutdown/
 message = ""
 """
 Shutdown_Help = (
-    "\nGUIDANCE I SHALL GIVE"
+    "\nHOW TO USE THE SHUTDOWN PLUGIN"
     "\n"
     "\nThis plugin will shutdown any target PC"
     "\n"
