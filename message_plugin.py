@@ -68,11 +68,11 @@ class Plugin:
                 
                 client.publish(f"workstation/{hostname}/n/message", str("Okayy"), 2, False)
                 #set log file contents
-                setattr(f, "logText", f"from {sender1} message: {message1} at {dt_string}")
-                f.log()
-                #sleep for 0.5 seconds
-                time.sleep(0.5)
-                #disconnect client
-                client.disconnect()
-                #quit loop
-                exit()
+            setattr(f, "logText", f"from {sender1} message: {message1} at {dt_string}")
+            f.log()
+            #sleep for 0.5 seconds
+            time.sleep(0.5)
+            #disconnect client
+            client.disconnect()
+            #quit loop
+            exit()
