@@ -49,7 +49,8 @@ class Plugin:
             client.loop_start()
             #publish information to sub-topic
             title = "Message"
-
+            message1 = DV.split("/")[-1]
+            sender1 = DV.split("/")[0]
             #getting the date and time
             date = datetime.now()
             dt_string = date.strftime("%d/%m/%Y %H:%M")
@@ -58,8 +59,7 @@ class Plugin:
                 client.publish(f"workstation/{hostname}/n/message/help", str(Message_Help), 2, False)
 
             if(subT == ""):
-                message1 = DV.split("/")[-1]
-                sender1 = DV.split("/")[0]
+                
 
                 #os.system(f"Command=$(zenity --info --window-icon={icon} --title={title} --text='Sent from {sender} on {dt_string}\n\nMessage: {DV}' --width=300 --height=150); echo $Command")
                 cmd = (f"Command=$(zenity --display=$DISPLAY --info --title={title} --text='Sent from {sender1} on {dt_string}\n\nMessage: {message1}' --width=300 --height=150); echo $Command")
