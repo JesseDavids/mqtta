@@ -58,11 +58,10 @@ class Plugin:
             if(subT == "help"):
                 client.publish(f"workstation/{hostname}/n/message/help", str(Message_Help), 2, False)
 
-            if(subT == ""):
+            elif(subT == ""):
                 
-
                 #os.system(f"Command=$(zenity --info --window-icon={icon} --title={title} --text='Sent from {sender} on {dt_string}\n\nMessage: {DV}' --width=300 --height=150); echo $Command")
-                cmd = (f"Command=$(zenity --display=$DISPLAY --info --title={title} --text='Sent from {sender1} on {dt_string}\n\nMessage: {message1}' --width=300 --height=150); echo $Command")
+                cmd = (f"Command=$(zenity --display=:0.0 --info --title={title} --text='Sent from {sender1} on {dt_string}\n\nMessage: {message1}' --width=300 --height=150); echo $Command")
                 subprocess.check_output([cmd], shell=True)
                 
                 
