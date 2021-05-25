@@ -120,7 +120,7 @@ class MyApp:
                     if(x == join):
                         y = y + 1
 
-                        if(y > 1 ):
+                        if(y <= 3):
                             
                             #if (secondWord == hostname or secondWord == ip or secondWord == "list"):
                                 #when using list_plugin
