@@ -117,10 +117,10 @@ class MyApp:
                 stuff = [device, location, department]
                 y = 0
                 for x in stuff:
-                    if(x in join):
+                    if(x == join):
                         y = y + 1
 
-                        if(y > 1 and y < 3):
+                        if(y > 1 ):
                             
                             #if (secondWord == hostname or secondWord == ip or secondWord == "list"):
                                 #when using list_plugin
