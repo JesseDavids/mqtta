@@ -82,8 +82,8 @@ class MyApp:
             #the on_message function comes from the paho library and waits for any incoming
             #messages from said subscribe topic
 
-            client.publish("workstation/list", str(hostname + " : " + ip), 2 , False)
-            client.subscribe("workstation/list", 2)
+            #client.publish("workstation/list", str(hostname + " : " + ip), 2 , False)
+            #client.subscribe("workstation/list", 2)
 
             def on_message(client, userdata, message):
                 m = str(message.payload.decode("utf-8"))
@@ -107,7 +107,7 @@ class MyApp:
                 delim = re.split("-", secondWord)
                 #print(delim)
                 join = '\n'.join(delim)
-
+                
 
                 device, location, department = m[:3], m[4:7], m[8:11]
                 #print(device)
@@ -116,11 +116,12 @@ class MyApp:
 
                 stuff = [device, location, department]
                 y = 0
-                for x in stuff:
-                    if(x == join):
+                for x in stuff:                    
+                    if(x in join):
                         y = y + 1
+                        #print(y)
 
-                        if(y <= 3):
+                        if(y > 1):
                             
                             #if (secondWord == hostname or secondWord == ip or secondWord == "list"):
                                 #when using list_plugin
@@ -141,7 +142,7 @@ class MyApp:
                                 if p3 == someVar:
                                     plugin.process()
                         
-                        elif(secondWord == hostname or secondWord == ip or secondWord):
+                        elif(secondWord == hostname or secondWord == ip or secondWord == "list"):
                             MyApp.run.m2 = topic.split("/")[-2]
                             m1 = m
                             MyApp.run.DynamicVar = m1
