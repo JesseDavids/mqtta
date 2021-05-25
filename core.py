@@ -4,6 +4,7 @@ import os
 import paho.mqtt.client as mqtt
 import utility as utility
 import time
+import re
 ##Main Class
 class MyApp:
     _plugins = []
@@ -40,7 +41,6 @@ class MyApp:
                         for m in plug:
                             m = "{}".format(x[0:-3])
                             if m.endswith("_plugin"):
-                                #plugins = []
                                 plugins.append(m)
                                 
                             break
@@ -51,11 +51,15 @@ class MyApp:
                         self._plugins = [
                             #import the module and initialise it at the same time
                             importlib.import_module(plugin,".").Plugin() for plugin in plugins
+                            
                         ]
                 break
             break
         
         filehandle.close()
+
+
+
         
     def run(self):
         #This is our main function called run and im instantiating objects from the utility file
@@ -77,9 +81,14 @@ class MyApp:
             client.loop_start()
             #the on_message function comes from the paho library and waits for any incoming
             #messages from said subscribe topic
+
+            client.publish("workstation/list", str(hostname + " : " + ip), 2 , False)
+            client.subscribe("workstation/list", 2)
+
             def on_message(client, userdata, message):
                 m = str(message.payload.decode("utf-8"))
                 topic = message.topic
+                
 
                 #exmaple topics:
                 #workstation/192.168.0.1/r/report_plugin/  
@@ -94,30 +103,60 @@ class MyApp:
                 
                 N = 2
                 secondWord = topic.split("/")[N-1]
+
+                delim = re.split("-", secondWord)
+                #print(delim)
+                join = '\n'.join(delim)
+
+
+                device, location, department = m[:3], m[4:7], m[8:11]
+                #print(device)
+                #print(location)
+                #print(department)
+
+                stuff = [device, location, department]
+                y = 0
+                for x in stuff:
+                    if(x in join):
+                        y = y + 1
+
+                        if(y > 1 and y < 3):
+                            
+                            #if (secondWord == hostname or secondWord == ip or secondWord == "list"):
+                                #when using list_plugin
+                                #example: (workstation/list/)
+                                #it will list all devices connected to the broker you set in Config file
+                                
+                            MyApp.run.m2 = topic.split("/")[-2]
+                            m1 = m
+                            MyApp.run.DynamicVar = m1
+                            self.msg = MyApp.run.m2
+                            someVar = self.msg + "_plugin"
+                            
+                            for plugin in self._plugins:
+                                p = str(plugin)
+                                p2 = p.split(".")[0]
+                                p3 = (p2[1:])                        
+                                
+                                if p3 == someVar:
+                                    plugin.process()
+                        
+                        elif(secondWord == hostname or secondWord == ip or secondWord):
+                            MyApp.run.m2 = topic.split("/")[-2]
+                            m1 = m
+                            MyApp.run.DynamicVar = m1
+                            self.msg = MyApp.run.m2
+                            someVar = self.msg + "_plugin"
+                            
+                            for plugin in self._plugins:
+                                p = str(plugin)
+                                p2 = p.split(".")[0]
+                                p3 = (p2[1:])                        
+                                
+                                if p3 == someVar:
+                                    plugin.process()
                 
-                if (secondWord == hostname or secondWord == ip or secondWord == "list"):
-                    #when using list_plugin
-                    #example: (workstations/list_plugin/)
-                    #it will list all devices connected to the broker you set in Config file
-                    
-                    MyApp.run.m2 = topic.split("/")[-2]
 
-                    m1 = m
-                    MyApp.run.DynamicVar = m1
-
-                    self.msg = MyApp.run.m2
-
-                    someVar = self.msg + "_plugin"
-                    
-                    
-                    for plugin in self._plugins:
-                        p = str(plugin)
-                        p2 = p.split(".")[0]
-                        p3 = (p2[1:])
-                        
-                        
-                        if p3 == someVar:
-                            plugin.process()
             
             #attach the function to the client
             client.on_message = on_message

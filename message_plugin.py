@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-#mqtta version 1)
+#mqtta version 1
 
 import subprocess
 from io import StringIO

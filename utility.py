@@ -11,7 +11,7 @@ class Utility:
     
     logText = ""
     
-    def util(self, trace_routes, hostname, cpu_usage, ram_usage, ipAddr, storage_used_total, used_percentage2, res, logText, DynamicVar, changeHostname, setBroker, logFile, subTopic):
+    def util(self, setEol, trace_routes, hostname, cpu_usage, ram_usage, ipAddr, storage_used_total, used_percentage2, res, logText, DynamicVar, changeHostname, setBroker, logFile, subTopic):
         self.hostname = hostname
         self.cpu_usage = cpu_usage
         self.ram_usage = ram_usage
@@ -26,6 +26,17 @@ class Utility:
         self.setBroker = setBroker
         self.logFile = logFile
         self.subTopic = subTopic
+        self.setEol = setEol
+    
+    def eol(self):
+        filename = "setup.config"
+        contents = open(filename).read()
+        config = eval(contents)
+        eol = config['eolFile']
+        f = open(eol, 'r')
+        f2 = f.readline()
+        self.setEol = f2
+        return self.setEol
 
     def subtopic(self):
         p = core.MyApp()
@@ -136,6 +147,7 @@ class Utility:
             "Storage": f'{strg}',
             "SystemUptime": f'{up}'
             }
+        
         json_system = json.dumps(system, indent=4)
         self.system = json_system
         return self.system
