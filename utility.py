@@ -11,8 +11,10 @@ class Utility:
     
     logText = ""
     
-    def util(self, setEol, trace_routes, hostname, cpu_usage, ram_usage, ipAddr, storage_used_total, used_percentage2, res, logText, DynamicVar, changeHostname, setBroker, logFile, subTopic):
+    def util(self, setEol, trace_routes, hostname, setUsername, setPassword, cpu_usage, ram_usage, ipAddr, storage_used_total, used_percentage2, res, logText, DynamicVar, changeHostname, setBroker, logFile, subTopic):
         self.hostname = hostname
+        self.setUsername = setUsername
+        self.setPassword = setPassword
         self.cpu_usage = cpu_usage
         self.ram_usage = ram_usage
         self.ipAddr = ipAddr
@@ -51,6 +53,22 @@ class Utility:
         broker = config['broker']
         self.setBroker = broker
         return(self.setBroker)
+
+    def username(self):
+        filename = "setup.config"
+        contents = open(filename).read()
+        config = eval(contents)
+        username = config['username']
+        self.setUsername = username
+        return(self.setUsername)
+
+    def password(self):
+        filename = "setup.config"
+        contents = open(filename).read()
+        config = eval(contents)
+        password = config['password']
+        self.setPassword = password
+        return(self.setPassword)
 
     def trace(self):
         p = core.MyApp()

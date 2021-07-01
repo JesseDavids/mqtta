@@ -66,13 +66,18 @@ class MyApp:
         f = utility.Utility()
         ip = f.ip()
         hostname = f.host()
+        userName = f.setUsername()
+        passWord = f.setPassword()
         BROKER = f.broker()
+
         
         while True:
             #set the function up for mqtt communication and set subscription
             broker = BROKER
             #i used the ip address to make it unique, you can add anything you want but it must be unique
             client = mqtt.Client(ip)
+            #provide the username and password from the config file.
+            client.username_pw_set(username=userName, password=passWord)
             #connect client to broker
             client.connect(broker)
             #set subscribtion
