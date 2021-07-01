@@ -66,8 +66,8 @@ class MyApp:
         f = utility.Utility()
         ip = f.ip()
         hostname = f.host()
-        userName = f.setUsername()
-        passWord = f.setPassword()
+        userName = f.setusername()
+        passWord = f.setpassword()
         BROKER = f.broker()
 
         
